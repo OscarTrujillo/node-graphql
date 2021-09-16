@@ -1,0 +1,35 @@
+# Utils
+enum AllowedState {
+  OPEN
+  IN_PROGRESS
+  COMPLETE
+}
+
+# Query
+extend type Query {
+    orders: [Order!]!
+    order(id: ID!): Order!
+}
+
+# Mutation
+extend type Mutation {
+    createOrder(customer: CustomerInput, items:[ItemInput]): Order
+}
+
+# Inputs
+input CustomerInput {
+    id: ID!
+}
+
+input ItemInput {
+    id: ID!
+}
+
+# Types
+type Order {
+    id: ID!
+    customer: Customer!
+    items: [Item]!
+    state: AllowedState!
+    employee: Employee
+}
