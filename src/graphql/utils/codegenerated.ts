@@ -21,18 +21,16 @@ export enum AllowedState {
 
 export type Customer = {
   __typename?: 'Customer';
+  email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  name: Scalars['String'];
-};
-
-export type CustomerInput = {
-  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Employee = {
   __typename?: 'Employee';
+  email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Item = {
@@ -54,8 +52,8 @@ export type Mutation = {
 
 
 export type MutationCreateOrderArgs = {
-  customer?: Maybe<CustomerInput>;
-  items?: Maybe<Array<Maybe<ItemInput>>>;
+  customerEmail: Scalars['String'];
+  items: Array<ItemInput>;
 };
 
 export type Order = {
@@ -63,14 +61,16 @@ export type Order = {
   customer: Customer;
   employee?: Maybe<Employee>;
   id: Scalars['ID'];
-  items: Array<Maybe<Item>>;
+  items?: Maybe<Array<Maybe<Item>>>;
   state: AllowedState;
 };
 
 export type Query = {
   __typename?: 'Query';
   _empty?: Maybe<Scalars['String']>;
-  order: Order;
+  employees: Array<Employee>;
+  items: Array<Item>;
+  order?: Maybe<Order>;
   orders: Array<Order>;
 };
 
@@ -151,7 +151,6 @@ export type ResolversTypes = {
   AllowedState: AllowedState;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Customer: ResolverTypeWrapper<Customer>;
-  CustomerInput: CustomerInput;
   Employee: ResolverTypeWrapper<Employee>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -167,7 +166,6 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Customer: Customer;
-  CustomerInput: CustomerInput;
   Employee: Employee;
   Float: Scalars['Float'];
   ID: Scalars['ID'];
@@ -180,14 +178,16 @@ export type ResolversParentTypes = {
 };
 
 export type CustomerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Customer'] = ResolversParentTypes['Customer']> = {
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type EmployeeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Employee'] = ResolversParentTypes['Employee']> = {
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -200,21 +200,23 @@ export type ItemResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createOrder?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationCreateOrderArgs, never>>;
+  createOrder?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationCreateOrderArgs, 'customerEmail' | 'items'>>;
 };
 
 export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = {
   customer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType>;
   employee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  items?: Resolver<Array<Maybe<ResolversTypes['Item']>>, ParentType, ContextType>;
+  items?: Resolver<Maybe<Array<Maybe<ResolversTypes['Item']>>>, ParentType, ContextType>;
   state?: Resolver<ResolversTypes['AllowedState'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  order?: Resolver<ResolversTypes['Order'], ParentType, ContextType, RequireFields<QueryOrderArgs, 'id'>>;
+  employees?: Resolver<Array<ResolversTypes['Employee']>, ParentType, ContextType>;
+  items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
+  order?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<QueryOrderArgs, 'id'>>;
   orders?: Resolver<Array<ResolversTypes['Order']>, ParentType, ContextType>;
 };
 

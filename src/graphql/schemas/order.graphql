@@ -8,19 +8,15 @@ enum AllowedState {
 # Query
 extend type Query {
     orders: [Order!]!
-    order(id: ID!): Order!
+    order(id: ID!): Order
 }
 
 # Mutation
 extend type Mutation {
-    createOrder(customer: CustomerInput, items:[ItemInput]): Order
+    createOrder(customerEmail: String!, items:[ItemInput!]!): Order!
 }
 
 # Inputs
-input CustomerInput {
-    id: ID!
-}
-
 input ItemInput {
     id: ID!
 }
@@ -29,7 +25,7 @@ input ItemInput {
 type Order {
     id: ID!
     customer: Customer!
-    items: [Item]!
+    items: [Item]
     state: AllowedState!
     employee: Employee
 }

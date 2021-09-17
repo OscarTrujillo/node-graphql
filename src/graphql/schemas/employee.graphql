@@ -1,4 +1,11 @@
+# Query
+extend type Query {
+    employees: [Employee!]!
+}
+
+# Types
 type Employee {
     id: ID!
-    name: String!
+    email: String
+    name: String
 }

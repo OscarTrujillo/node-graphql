@@ -1,3 +1,9 @@
+# Query
+extend type Query {
+    items: [Item!]!
+}
+
+# Types
 type Item {
     id: ID!
     name: String!

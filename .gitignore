@@ -1,3 +1,5 @@
 *.log
+test.graphql
 node_modules/
 dist/
+build/

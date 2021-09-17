@@ -1,0 +1,85 @@
+{
+  "customers": [
+    {
+      "id": "c19235f0-9330-4720-8d49-df400c2ab4dc",
+      "name": "Homer Simpson",
+      "email": "homer@mail.com"
+    },
+    {
+      "id": "776b2597-8292-475f-b24b-be9bfa5d20d6",
+      "email": "homer2@mail.com"
+    }
+  ],
+  "employees": [
+    {
+      "id": "a90ca009-8879-417f-946b-7cb59fda3616",
+      "name": "Alice",
+      "email": "alice@mail.com"
+    }
+  ],
+  "items": [
+    {
+      "id": "c63330af-ce62-44c1-9393-f520df960e75",
+      "name": "Beer",
+      "price": "2.2"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ed8484ee-6384-4aa8-a2c5-dcfc5f6066fe",
+      "customerId": "c19235f0-9330-4720-8d49-df400c2ab4dc",
+      "employeeId": "a90ca009-8879-417f-946b-7cb59fda3616",
+      "state": "OPEN",
+      "items": [
+        {
+          "id": "c63330af-ce62-44c1-9393-f520df960e75",
+          "amount": "2"
+        }
+      ]
+    },
+    {
+      "id": "1b0822d8-120a-4ae5-a550-8e7ec115c503",
+      "customerId": "c19235f0-9330-4720-8d49-df400c2ab4dc",
+      "state": "OPEN",
+      "items": [
+        {
+          "id": "c63330af-ce62-44c1-9393-f520df960e75",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "6c23db1a-8b82-4868-9f53-bb51ca20b3a2",
+      "customerId": "c19235f0-9330-4720-8d49-df400c2ab4dc",
+      "state": "OPEN",
+      "items": [
+        {
+          "id": "c63330af-ce62-44c1-9393-f520df960e75",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "6470e0c4-6b9a-46f2-b8bc-21833209de5c",
+      "customerId": "776b2597-8292-475f-b24b-be9bfa5d20d6",
+      "state": "OPEN",
+      "items": [
+        {
+          "id": "c63330af-ce62-44c1-9393-f520df960e75",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "49cc4aec-724a-44da-9ff9-25a428800374",
+      "customerId": "c19235f0-9330-4720-8d49-df400c2ab4dc",
+      "state": "OPEN",
+      "items": [
+        {
+          "id": "c63330af-ce62-44c1-9393-f520df960e75",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}
