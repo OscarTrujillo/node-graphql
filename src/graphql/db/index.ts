@@ -95,7 +95,16 @@ export async function createOrder(customerEmail: string, items: ItemInput[]): Pr
   return buildOrderResponse(dbOrder);
 }
 
-export async function assignOrder(employeeEmail?: string): Promise<Order> {
+export async function assignOrder(orderId: string, employeeEmail?: string): Promise<Order> {
+  const dbOrder = db.data?.orders.find((o) => o.id === orderId);
+  if (!dbOrder) {
+    throw new Error('order doesn`t exist');
+  }
+
+  if (dbOrder.state !== AllowedState.Open) {
+    throw new Error('order is not Open');
+  }
+
   let dbEmployee: IdbEmployee | undefined;
   if (employeeEmail) {
     dbEmployee = db.data?.employees.find((c) => c.email == employeeEmail);
@@ -105,13 +114,29 @@ export async function assignOrder(employeeEmail?: string): Promise<Order> {
     }
   } else {
     // if not email, select one employee
-
-    const muylargoajsjkdbakjsbdlkjasndasd = [];
-    const employeesFree = muylargoajsjkdbakjsbdlkjasndasd.filter(
-      ({ id: id1 }) => !muylargoajsjkdbakjsbdlkjasndasd.some((id2) => id2 === id1)
-    );
     // todo: select less busy employee
-
     dbEmployee = db.data?.employees[0];
   }
+
+  dbOrder.employeeId = dbEmployee?.id;
+  dbOrder.state = AllowedState.InProgress;
+  await db.write();
+
+  return buildOrderResponse(dbOrder);
+}
+
+export async function completeOrder(orderId: string): Promise<Order> {
+  const dbOrder = db.data?.orders.find((o) => o.id === orderId);
+  if (!dbOrder) {
+    throw new Error('order doesn`t exist');
+  }
+  if (dbOrder.state !== AllowedState.InProgress) {
+    throw new Error('order is not In Progress');
+  }
+  dbOrder.state = AllowedState.Complete;
+  delete dbOrder.employeeId; // todo: think if keep it
+
+  await db.write();
+
+  return buildOrderResponse(dbOrder);
 }

@@ -7,25 +7,27 @@ enum AllowedState {
 
 # Query
 extend type Query {
-    orders: [Order!]!
-    order(id: ID!): Order
+  orders: [Order!]!
+  order(id: ID!): Order
 }
 
 # Mutation
 extend type Mutation {
-    createOrder(customerEmail: String!, items:[ItemInput!]!): Order!
+  createOrder(customerEmail: String!, items: [ItemInput!]!): Order!
+  assignOrder(orderId: String!, employeeEmail: String): Order!
+  completeOrder(orderId: String!): Order!
 }
 
 # Inputs
 input ItemInput {
-    id: ID!
+  id: ID!
 }
 
 # Types
 type Order {
-    id: ID!
-    customer: Customer!
-    items: [Item]
-    state: AllowedState!
-    employee: Employee
+  id: ID!
+  customer: Customer!
+  items: [Item]
+  state: AllowedState!
+  employee: Employee
 }

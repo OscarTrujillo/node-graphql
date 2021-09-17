@@ -47,7 +47,20 @@ export type ItemInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   _empty?: Maybe<Scalars['String']>;
-  createOrder?: Maybe<Order>;
+  assignOrder: Order;
+  completeOrder: Order;
+  createOrder: Order;
+};
+
+
+export type MutationAssignOrderArgs = {
+  employeeEmail?: Maybe<Scalars['String']>;
+  orderId: Scalars['String'];
+};
+
+
+export type MutationCompleteOrderArgs = {
+  orderId: Scalars['String'];
 };
 
 
@@ -200,7 +213,9 @@ export type ItemResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createOrder?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationCreateOrderArgs, 'customerEmail' | 'items'>>;
+  assignOrder?: Resolver<ResolversTypes['Order'], ParentType, ContextType, RequireFields<MutationAssignOrderArgs, 'orderId'>>;
+  completeOrder?: Resolver<ResolversTypes['Order'], ParentType, ContextType, RequireFields<MutationCompleteOrderArgs, 'orderId'>>;
+  createOrder?: Resolver<ResolversTypes['Order'], ParentType, ContextType, RequireFields<MutationCreateOrderArgs, 'customerEmail' | 'items'>>;
 };
 
 export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = {
