@@ -1,5 +1,7 @@
 *.log
 test.graphql
+db.json
+
 node_modules/
 dist/
 build/

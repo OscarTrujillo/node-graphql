@@ -19,6 +19,8 @@ Project using NodeJs, Express, Typescript, GraphQL and LowDB
 ```
 npm install
 
+npm run initDB
+
 npm run start:dev
 ```
 
