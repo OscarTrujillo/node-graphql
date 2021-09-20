@@ -25,6 +25,8 @@
       "id": "ed8484ee-6384-4aa8-a2c5-dcfc5f6066fe",
       "customerId": "c19235f0-9330-4720-8d49-df400c2ab4dc",
       "state": "OPEN",
+      "createdAt": "1631958127",
+      "updatedAt": "1631958127",
       "items": [
         {
           "id": "c63330af-ce62-44c1-9393-f520df960e75",

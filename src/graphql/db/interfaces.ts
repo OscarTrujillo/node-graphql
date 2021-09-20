@@ -26,6 +26,9 @@ export interface IdbItemSelection {
 export interface IdbOrder { 
     id: string;
     customerId: string;
+    updatedAt: number;
+    createdAt: number;
+    
     employeeId?: string;
     state: AllowedState;
     items: IdbItemSelection[];

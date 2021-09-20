@@ -29,5 +29,5 @@ npm run start:dev
 To generate types from graphql schemas use:
 
 ```
-npm codegen
+npm run codegen
 ```

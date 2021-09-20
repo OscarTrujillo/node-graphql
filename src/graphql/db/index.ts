@@ -43,6 +43,8 @@ const buildOrderResponse = (o: IdbOrder) => {
   const order: Order = {
     id: o.id,
     state: o.state as AllowedState,
+    createdAt: o.createdAt,
+    updatedAt: o.updatedAt,
     employee,
     customer,
     items: items,
@@ -83,6 +85,9 @@ export async function createOrder(customerEmail: string, items: ItemInput[]): Pr
     id: uuid(),
     customerId: customer.id,
     state: AllowedState.Open,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+
     items: items.map((i) => {
       return { id: i.id, amount: 1 };
     }),
@@ -120,6 +125,7 @@ export async function assignOrder(orderId: string, employeeEmail?: string): Prom
 
   dbOrder.employeeId = dbEmployee?.id;
   dbOrder.state = AllowedState.InProgress;
+  dbOrder.updatedAt = Date.now();
   await db.write();
 
   return buildOrderResponse(dbOrder);
@@ -135,7 +141,7 @@ export async function completeOrder(orderId: string): Promise<Order> {
   }
   dbOrder.state = AllowedState.Complete;
   delete dbOrder.employeeId; // todo: think if keep it
-
+  dbOrder.updatedAt = Date.now();
   await db.write();
 
   return buildOrderResponse(dbOrder);

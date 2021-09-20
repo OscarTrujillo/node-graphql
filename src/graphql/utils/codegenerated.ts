@@ -71,11 +71,13 @@ export type MutationCreateOrderArgs = {
 
 export type Order = {
   __typename?: 'Order';
+  createdAt: Scalars['Float'];
   customer: Customer;
   employee?: Maybe<Employee>;
   id: Scalars['ID'];
   items?: Maybe<Array<Maybe<Item>>>;
   state: AllowedState;
+  updatedAt: Scalars['Float'];
 };
 
 export type Query = {
@@ -219,11 +221,13 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = {
+  createdAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   customer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType>;
   employee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   items?: Resolver<Maybe<Array<Maybe<ResolversTypes['Item']>>>, ParentType, ContextType>;
   state?: Resolver<ResolversTypes['AllowedState'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
