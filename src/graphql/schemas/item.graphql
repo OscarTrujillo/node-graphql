@@ -1,11 +1,24 @@
 # Query
 extend type Query {
-    items: [Item!]!
+  items: [Item!]!
 }
 
 # Types
 type Item {
-    id: ID!
-    name: String!
-    price: Float!
+  id: ID!
+  name: String!
+  price: Float!
+}
+
+type Item {
+  id: ID!
+  name: String!
+  price: Float!
+}
+
+type ItemSelection {
+  id: ID!
+  name: String!
+  price: Float!
+  amount: Int!
 }

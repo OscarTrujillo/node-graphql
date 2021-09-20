@@ -3,7 +3,15 @@ import { DatabaseStructure, IdbCustomer, IdbOrder, IdbEmployee } from './interfa
 import { v4 as uuid } from 'uuid';
 
 import * as _ from 'lodash';
-import { AllowedState, Employee, Item, Order, Maybe, ItemInput } from '../utils/codegenerated';
+import {
+  AllowedState,
+  Employee,
+  Item,
+  Order,
+  Maybe,
+  ItemInput,
+  ItemSelection,
+} from '../utils/codegenerated';
 
 const adapter = new JSONFile<DatabaseStructure>('db.json');
 const db = new Low(adapter);
@@ -36,9 +44,10 @@ const buildOrderResponse = (o: IdbOrder) => {
   }
 
   const items = o.items.map((orderItem) => {
-    const item = db.data?.items.find((i) => i.id === orderItem.id);
+    const item = db.data?.items.find((i) => i.id === orderItem.id) as ItemSelection;
+    item.amount = orderItem.amount;
     return item;
-  }) as Maybe<Item>[];
+  }) as Maybe<ItemSelection>[];
 
   const order: Order = {
     id: o.id,
@@ -89,7 +98,7 @@ export async function createOrder(customerEmail: string, items: ItemInput[]): Pr
     updatedAt: Date.now(),
 
     items: items.map((i) => {
-      return { id: i.id, amount: 1 };
+      return { id: i.id, amount: i.amount };
     }),
   };
 

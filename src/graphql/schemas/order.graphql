@@ -21,13 +21,14 @@ extend type Mutation {
 # Inputs
 input ItemInput {
   id: ID!
+  amount: Int!
 }
 
 # Types
 type Order {
   id: ID!
   customer: Customer!
-  items: [Item]
+  items: [ItemSelection]!
   state: AllowedState!
   employee: Employee
 
